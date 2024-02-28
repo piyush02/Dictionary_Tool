@@ -29,7 +29,14 @@ Run the Flask application:
     python3 dict_flask.py
 
     Open a web browser and go to http://localhost:5000 to access the application.
+Without Python Installed
 
+    Simply run the binary executable dict_flask:
+
+
+./dict_flask
+
+Open a web browser and go to http://localhost:5000 to access the application.
 Running with Docker
 
     Build the Docker image:
