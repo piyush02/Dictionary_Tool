@@ -24,9 +24,9 @@ pip install -r requirements.txt
 
 Run the Flask application:
 
-bash
 
-    python dict_flask.py
+
+    python3 dict_flask.py
 
     Open a web browser and go to http://localhost:5000 to access the application.
 
@@ -34,13 +34,13 @@ Running with Docker
 
     Build the Docker image:
 
-    bash
+    
 
 docker build -t dictionary-flask-app .
 
 Run the Docker container:
 
-bash
+
 
     docker run -p 5000:5000 dictionary-flask-app
 
