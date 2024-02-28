@@ -11,6 +11,10 @@ Files and Directories
     requirements.txt: List of Python dependencies required by the application.
     Dockerfile: Dockerfile for building a Docker image of the application.
 
+Authentication with DictionaryAPI.com
+
+To authenticate with the Merriam-Webster dictionary API, the script requires an API key. This API key is stored as the API_KEY variable in the script. The API key is used to include the key parameter in the API request URL, allowing access to the API's features.
+
 Usage
 Running Locally
 
