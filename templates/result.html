@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictionary Result</title>
+</head>
+<body>
+    <h1>Dictionary Result</h1>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% else %}
+        <p><strong>{{ word_id }}</strong> ({{ word }}): {{ definition }}</p>
+    {% endif %}
+    <a href="/">Back to search</a>
+</body>
+</html>
