@@ -18,7 +18,7 @@ Running Locally
 
     Install the required Python packages:
 
-    bash
+
 
 pip install -r requirements.txt
 
