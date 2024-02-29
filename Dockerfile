@@ -1,6 +1,9 @@
 # Use an Alpine Linux image as a base
 FROM alpine:latest
 
+# Set environment variables
+ENV SERVE_PORT 5000
+
 # Set the working directory in the container
 WORKDIR /app
 
