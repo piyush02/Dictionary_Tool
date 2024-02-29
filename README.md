@@ -124,3 +124,57 @@ The workflow is triggered manually. It does not run automatically on push events
 Conclusion
 
 This CD workflow automates the deployment process for the dictionary application to an AWS EKS Kubernetes cluster, making it easy to deploy changes quickly and consistently.
+
+Unit Testing for Dictionary Flask App
+
+This repository contains unit tests for testing the functionality of the Dictionary Flask App. The unit tests are written in Python using the unittest framework and the unittest.mock module for mocking external dependencies.
+File Structure
+
+    dict_flask.py: The main Flask application file containing the routes and logic for interacting with the Merriam-Webster Dictionary API.
+    unit_test.py: The unit test file containing test cases for testing the functionality of the Flask application.
+    venv/: Virtual environment directory for managing Python dependencies.
+
+Running the Tests
+
+To run the unit tests, follow these steps:
+
+    Clone the Repository: Clone this repository to your local machine.
+
+    
+
+git clone https://github.com/your-username/your-repository.git
+
+Navigate to the Repository Directory: Change your current directory to the cloned repository.
+
+
+cd your-repository
+
+Activate Virtual Environment (Optional): If you prefer to use a virtual environment, activate it using the following command.
+
+
+source venv/bin/activate
+
+Install Dependencies: Install the required dependencies using pip.
+
+
+pip install -r requirements.txt
+
+bash
+
+    python unit_test.py
+
+Test Cases
+
+The unit tests cover the following scenarios:
+
+    Testing the index route to ensure it returns the correct HTML content.
+    Testing the search route with a valid word to verify the response.
+    Testing the search route with a non-existent word to verify the error message.
+    Testing the get_definition function with a successful API response.
+    Testing the get_definition function with an error response from the API.
+
+Mocking External Dependencies
+
+The unit tests use the unittest.mock.patch decorator to mock external dependencies such as the requests.get method. This allows the tests to run independently of external services, ensuring reliable and consistent results.
+
+
