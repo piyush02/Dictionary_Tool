@@ -1,0 +1,64 @@
+name: CD
+
+on:
+  workflow_dispatch:
+    inputs:
+      aws-region:
+        description: 'AWS Region'
+        required: true
+      eks-cluster-name:
+        description: 'EKS Cluster Name'
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      WORKSPACE: ${{ github.workspace }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create working directory
+        run: mkdir $WORKSPACE/my_working_directory
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install AWS CLI
+        run: |
+          pip install awscli
+
+      - name: Configure AWS credentials
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set region ${{ github.event.inputs.aws-region }}
+
+      - name: AWS EKS login
+        run: |
+          aws eks --region ${{ github.event.inputs.aws-region }} update-kubeconfig --name ${{ github.event.inputs.eks-cluster-name }}
+
+      - name: Apply namespace
+        run: |
+          kubectl apply -f namespace.yaml
+        working-directory: $WORKSPACE/my_working_directory
+
+      - name: Create Docker registry secret
+        run: |
+          kubectl create secret docker-registry myregistrykey \
+            --docker-server=${{ secrets.DOCKER_REGISTRY_SERVER }} \
+            --docker-username=${{ secrets.DOCKER_USER }} \
+            --docker-password=${{ secrets.DOCKER_PASSWORD }} \
+            --docker-email=${{ secrets.DOCKER_EMAIL }} \
+            --namespace=devops-task
+        working-directory: $WORKSPACE/my_working_directory
+
+      - name: Apply deployment
+        run: |
+          kubectl apply -f dict_flask.yaml
+        working-directory: $WORKSPACE/my_working_directory
